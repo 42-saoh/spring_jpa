@@ -78,7 +78,6 @@ public abstract class QueryDSLRepository {
         JPAQuery jpaQuery = contentQuery.apply(getQueryFactory());
         List<T> content = getQuerydsl().applyPagination(pageable,
                 jpaQuery).fetch();
-
         return PageableExecutionUtils.getPage(content, pageable,
                 content::size);
     }

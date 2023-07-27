@@ -9,6 +9,7 @@ import project.jpa.dto.BoardCreateDTO;
 import project.jpa.dto.BoardFindDTO;
 import project.jpa.dto.CommentCreateDTO;
 import project.jpa.entity.Board;
+import project.jpa.entity.enums.BoardType;
 import project.jpa.service.BoardService;
 
 import java.util.Map;
@@ -31,7 +32,7 @@ public class BoardController {
 
     @GetMapping("/find")
     public ResponseEntity<Page<Board>> findBoardByTitle(@RequestParam Map<String, String> param, @PageableDefault Pageable pageable) {
-        BoardFindDTO boardFindDTO = new BoardFindDTO(param.get("title"), param.get("content"), param.get("createdBy"));
+        BoardFindDTO boardFindDTO = new BoardFindDTO(param.get("title"), param.get("content"), param.get("createdBy"), BoardType.valueOf(param.get("boardType")), param.get("tap"));
         return ResponseEntity.ok(boardService.findBoardByTitle(boardFindDTO, pageable));
     }
 
